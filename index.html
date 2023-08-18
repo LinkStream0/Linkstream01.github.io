@@ -1,33 +1,397 @@
-<!DOCTYPE html>
-<html lang="en">
+ <!DOCTYPE html>
+<html>
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>Document</title>
-</head>
-<style>
-body{
-   margin: 0;
-   padding: 0;
-   max-width: 100%;
-   width: 100%;
-   height: 100vh;
-   overflow: hidden;
-}
-   iframe{
-      margin: 0;
-  padding: 0;
-  width: 87%;
-  height: 100vh;
-  overflow: hidden;
-      width: 100%;
-      height: 100vh;
-   }
-</style>
-<body>
-  <!-----<iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=30&p=14&l=ur1&category=prime_video&banner=1HCK8A0T6T6RQ0AY5B82&f=ifr&linkID=5baf220f9c8a75259b86bf75adff6af2&t=linkstream-21&tracking_id=linkstream-21" width="100%" height="100px" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0" sandbox="allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>---->
-   <iframe  src="https://linkstream0.github.io/" frameborder="0"></iframe>
+  <title>Interfaz de Películas</title>
+<link rel="stylesheet" href="https://dl.dropbox.com/scl/fi/xbpt2tzdsca3o2jvulqvo/cssplantilla.css?rlkey=75yw37hsshehx7buifr3j0xs2">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Josefin+Sans:wght@100&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+  <style>
+     .logo-containerIcono {
+        display: flex ;
+  font-family: 'Rowdies', cursive;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
+  filter: hue-rotate(230deg) saturate(179%);
+position: sticky;
+   top: 5px ;
    
+  background: linear-gradient(to left, yellow, gold, 0.5);
+  filter: hue-rotate(877deg) saturate(20%);
+
+}
+
+.link-iconIcono {
+  width: auto;
+  height: auto;
+  margin-right: 3px;
+  animation: bounce2 1s infinite;
+}
+
+@keyframes bounce2 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+
+
+
+.stream-textIcono {
+  font-size: 10px;
+  height: 9px;
+  background: linear-gradient(to right, #F47B32, #DB3C2A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: red;
+  opacity: 0; 
+  animation: streamFadeIn2 2s forwards;
+
+border-radius :3px ;
+margin: 0;
+padding: 0;
+-webkit-text-stroke : 0.00px white;
+}
+  
+@keyframes streamFadeIn2 {
+  0% {opacity: 0;}  
+  100% {opacity: 0.8;}
+}
+
+/****PABTALLA DE CARAGA**/
+.logo-container {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 64px;
+  color: black;
+  cursor: pointer;
+  z-index: 1;
+ 
+}
+
+.link-icon {
+  width: 72px;
+  height: 72px;
+  margin-right: 5px;
+  animation: bounce 1s infinite;
+   -webkit-text-stroke: 1px white;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.glitch {
+  color: black;
+  position: relative;
+  animation: glitch 600ms infinite;
+}
+
+@keyframes glitch {
+  0% {clip: rect(36px, 9999px, 99px, 0)}
+  5% {clip: rect(25px, 9999px, 99px, 0)}
+  10% {clip: rect(30px, 9999px, 66px, 0)}
+  15% {clip: rect(26px, 9999px, 22px, 0)}
+  20% {clip: rect(91px, 9999px, 96px, 0)}
+  25% {clip: rect(2px, 9999px, 53px, 0)}
+  30% {clip: rect(75px, 9999px, 57px, 0)}
+  35% {clip: rect(66px, 9999px, 93px, 0)}
+  40% {clip: rect(5px, 9999px, 18px, 0)}
+  45% {clip: rect(88px, 9999px, 15px, 0)}
+  50% {clip: rect(67px, 9999px, 47px, 0)}
+  55% {clip: rect(24px, 9999px, 11px, 0)}
+  60% {clip: rect(28px, 9999px, 71px, 0)}
+  65% {clip: rect(51px, 9999px, 37px, 0)}
+  70% {clip: rect(92px, 9999px, 70px, 0)}
+  75% {clip: rect(46px, 9999px, 14px, 0)}
+  80% {clip: rect(63px, 9999px, 3px, 0)}
+  85% {clip: rect(16px, 9999px, 24px, 0)}
+  90% {clip: rect(77px, 9999px, 91px, 0)}
+  95% {clip: rect(62px, 9999px, 100%, 0)}
+  100% {clip: rect(85px, 9999px, 29px, 0)}  
+}
+
+.stream-text {
+    -webkit-text-stroke :0.2px white ;
+   font-family: 'Rowdies', cursive;
+  font-size: 68px;
+  background: linear-gradient(to right, #F47B32, #DB3C2A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0; 
+  animation: streamFadeIn 2s forwards;
+}
+  
+@keyframes streamFadeIn {
+  0% {opacity: 0;}  
+  100% {opacity: 1;}
+}
+
+canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.popupcarga {
+   
+
+  background: linear-gradient(to left, yellow, gold, 0.5);
+  filter: hue-rotate(877deg) saturate(20%);
+
+  overflow: hidden;
+
+
+  margin: 0;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  position: fixed;
+  z-index: 1000; 
+  width: 100%;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.5s; 
+  
+}
+
+.show {
+  opacity: 1; 
+}
+
+  </style>
+</head>
+    <script src="https://kit.fontawesome.com/32ac7cd722.js" crossorigin="anonymous"></script>
+<body>
+  
+<!-- Agrega un campo de búsqueda y un botón de búsqueda -->
+
+
+<div class="referencias_C" id="referencias_CID">
+   <div class="logo-containerIcono">
+  <i class="fas fa-link link-iconIcono"></i>
+  <span class="stream-textIcono">Stream</span>
+</div>
+<!--buscador--->
+ <div class="sidebar">
+
+  <div class="icon-container">
+    <i class="fas fa-search" id="searchIcon"></i>
+    <!-- Agrega más iconos según tus necesidades -->
+  </div>
+</div>
+
+<div class="barraNavigacion" >
+   
+         <span class="todas clickefect1" onclick="pag_global()"><i class="fa-solid fa-house"></i></span>
+<div class="referencias_C2">
+  <!-- Referencias para los géneros -->
+  <div class="contenedor_referencia">
+  <span class="referencia clickefect1" onclick="agregarReferencia('accion')" style="display: flex"><i class="fa-solid fa-gun"></i>Accion</span>
+  <span class="referencia clickefect1" onclick="agregarReferencia('comedia')"style="display: flex"><i class="fa-solid fa-masks-theater"></i>Comedia</span>
+  <span class="referencia clickefect1" onclick="agregarReferencia('drama')"style="display: flex"><i class="fa-brands fa-fort-awesome-alt"></i>Drama</span>
+  <span class="referencia clickefect1" onclick="agregarReferencia('suspenso')"style="display: flex"><i class="fa-solid fa-mask" ></i>suspenso</span>
+  <span class="referencia clickefect1" onclick="agregarReferencia('terror')"style="display: flex"><i class="fa-solid fa-ghost" ></i>Terror</span>
+  <span class="referencia clickefect1" onclick="agregarReferencia('animacion')"style="display: flex"><i class="fa-solid fa-robot"></i>infantiles</span>
+  <!-- Agrega más referencias de género según tus necesidades -->
+
+  <!-- Referencias para los años -->
+  <span class="referencia clickefect1" onclick="agregarReferencia('misterio')"style="display: flex"><i class="fa-solid fa-user-secret" ></i>Misterio</span>
+  <span class="referencia clickefect1" onclick="agregarReferencia('romance')"style="display: flex"><i class="fa-brands fa-gratipay" ></i>Romance</span>
+    <span class="referencia clickefect1" onclick="agregarReferencia('ciencia ficcion')"style="display: flex"><i class="fa-solid fa-explosion" ></i>C.ficcion</span>
+      <span class="referencia clickefect1" onclick="agregarReferencia('documental')"style="display: flex"><i class="fa-solid fa-file-video" ></i>Documental</span>
+   <!--  <span class="referencia" onclick="agregarReferencia('2022')">2022</span>
+Agrega más referencias de año según tus necesidades -->
+
+</div>
+  </div>
+   </div>
+  </div>
+
+<form id="formBusqueda">
+   <button type="button" id="closeButton_busqueda"><i class="fas fa-times"></i></button>
+
+   <div class="entrada_buaqueda">
+  <!-- Campo de búsqueda -->
+  <input type="text" id="searchInput" placeholder="Buscar pelicula">
+    <!-- Botón de búsqueda -->
+  <button type="button" id="searchButton">Buscar</button>
+  </div>
+
+
+</form>
+
+   <!-- Contenedor para el spinner de carga -->
+<div id="spinnerContainer" class="spinner-container">
+   <!------
+  <div class="spinner"></div>
+  --->
+  <div class="popupcarga">
+
+
+<div class="logo-container glitch">
+  <i class="fas fa-link link-icon"></i>
+  <span class="stream-text">Stream</span>
+</div>
+
+<canvas id="particles"></canvas>
+
+<script>
+
+// Animación de letras
+const span = document.querySelector('.stream-text');
+const letters = span.textContent.split("");
+
+span.textContent = "";
+
+letters.forEach(letter => {
+  const l = document.createElement("span");
+  l.textContent = letter;
+  l.className = "animated-chars"; 
+  span.append(l);
+});
+
+// Partículas con Canvas  
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+const numParticles =23 ;
+
+for(let i = 0; i < numParticles; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: Math.random() * 5 - 6,
+    vy: Math.random() * 3 - 4,
+    color: 'white'
+  })
+} 
+
+function drawParticles() {
+
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  
+  particles.forEach(particle => {
+    particle.x += particle.vx;
+    particle.y += particle.vy;
+    
+    if(particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+    if(particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+    ctx.beginPath();
+    ctx.fillStyle = particle.color;
+    ctx.arc(particle.x, particle.y, 1, 11, 2 * Math.PI);
+    ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+    
+    ctx.shadowBlur = 100;
+    ctx.fill();
+  });
+  
+  requestAnimationFrame(drawParticles);
+}
+
+drawParticles();
+
+</script>
+ <script>
+      const popupcarga = document.querySelector('.popupcarga');
+popupcarga.classList.add('show');
+   </script>
+
+</div>
+
+</div>
+<!-- Contenedor para mostrar la ventana emergente con detalles de la película -->
+<div id="popupContainer" class="popup-container">
+  <div class="popup-content">
+    <!-- Aquí se mostrarán los detalles de la película -->
+    <iframe id="movieDetailsIframe" width="400" height="300" src="" frameborder="0"></iframe><!-- Botón de pantalla completa -->
+        <button id="fullscreen-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i> </button>
+
+    <p id="movieDetails"></p>
+    <p id="movieDuration"style="font-family: 'Ubuntu', sans-serif; color:gray;position:relative;left: ;margin:0;"></p>
+<h5 style="font-family: 'Ubuntu', sans-serif; colo-webkit-text-stroke:0.2px black;position:relative;left: ;top:10px;margin:0;font-size: 10px;">Resumen</h5>
+    <p id="movieSynopsis"></p>
+    <span class="botonera_links" id="botonera_links_ID"></span>
+        <p id="movieGenre"></p>
+    <button id="closeButton"><i class="fa-sharp fa-solid fa-circle-xmark"></i></button>
+    <div class="optionElementContent_Css" id="optionElementContent_ID"></div>
+    
+  </div>
+</div>
+
+ <div class="c_contenido">
+  <div class="contenido">
+  <div id="moviesContainer"></div>
+<div id="navigationContainer"></div>
+
+</div>
+</div>
+ <script src="https://dl.dropbox.com/scl/fi/4f2iviy8skt4msu3wkag6/peliculasLogica.js?rlkey=3ep2vp6r8q8qgzoccy582u055"></script>
+  <script src="https://dl.dropbox.com/scl/fi/2qxfagynksp65rzwbp3iz/buscador.js?rlkey=hn9yqujx9txzzrgtnvowv6oqg"></script>
 </body>
-</html>
+ <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+    <script src="contador.js"></script>
+    <script>
+       // Configura tu objeto de configuración de Firebase
+const firebaseConfig = {
+   apiKey: "AIzaSyCB0fQGAd7NSwgP-GWive4YRAU9v_uV1F8",
+   authDomain: "cooperativ-cb0d4.firebaseapp.com",
+   databaseURL: "https://cooperativ-cb0d4-default-rtdb.firebaseio.com",
+   projectId: "cooperativ-cb0d4",
+   storageBucket: "cooperativ-cb0d4.appspot.com",
+   messagingSenderId: "1009427324331",
+   appId: "1:1009427324331:web:5a125c9e46dfbbe87c86ee",
+   measurementId: "G-VB36CLTBCN"
+};
+
+// Inicializa Firebase con la configuración
+firebase.initializeApp(firebaseConfig);
+
+// Obtén una referencia a la base de datos de Firebase
+const database = firebase.database();
+
+// Obtén el elemento del contador en el DOM
+//const contadorElemento = document.getElementById('contador');
+
+// Obtiene el valor actual del contador desde la base de datos de Firebase
+database.ref('contador').once('value').then(snapshot => {
+    let contador = snapshot.val();
+    if (contador === null) {
+        contador = 0;
+    }
+    
+    // Incrementa el contador cada vez que la página se carga
+    //contador++;
+    
+    // Actualiza el contador en el DOM
+  //  contadorElemento.textContent = contador;
+    
+    // Guarda el nuevo valor del contador en la base de datos de Firebase
+    database.ref('contador').set(contador);
+});
+
+    </script>
+
+   </html>
