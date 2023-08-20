@@ -391,7 +391,7 @@ database.ref('contador/'+'s2').once('value').then(snapshot => {
   //  contadorElemento.textContent = contador;
     
     // Guarda el nuevo valor del contador en la base de datos de Firebase
-    database.ref('contador').set(contador);
+    database.ref('contador/'+'s1').set(contador);
 });
 
     </script>
