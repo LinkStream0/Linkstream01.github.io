@@ -254,7 +254,7 @@ top: 0;
          <span class="todas clickefect1" onclick="pag_global()"><i class="fa-solid fa-house"></i ></span>
     <!---Em vvivo btn---->     
 <span class="todas clickefect1" id="enVivoBtn" style="font-size:7px"><i class="fa-solid fa-tower-broadcast" style="font-size:10px"></i>En Directo</span>
-
+<span class="todas clickefect1" id="cineVivoBtn" style="font-size:7px;display: grid"><i class="" style="font-size:13px; color: red">Cine</i>Domingo</span>
 <div class="referencias_C2">
   <!-- Referencias para los géneros -->
   <div class="contenedor_referencia">
@@ -453,12 +453,18 @@ database.ref('contador').once('value').then(snapshot => {
   <!--abrir ifra--->
     <script>
        const openModalButton = document.getElementById("enVivoBtn");
+       //programaciondomimgo
+       const openModalButton2 = document.getElementById("cineVivoBtn");
        const modal = document.getElementById("enVivoP");
   
        // Función para abrir el modal
        function openModal() {
           modal.style.display = "grid";
           iframeEnVivo.src ='https://linkstream0.github.io/LinkStream0Live.github.io/';
+       }
+       function openModal2() {
+          modal.style.display = "grid";
+          iframeEnVivo.src ='https://linkstream0.github.io/Prograciondeldia/';
        }
   
        // Función para cerrar el modal
@@ -469,7 +475,7 @@ database.ref('contador').once('value').then(snapshot => {
   
        // Abrir el modal al hacer clic en el botón
        openModalButton.addEventListener("click", openModal);
-  
+  openModalButton2.addEventListener("click", openModal2);
        // Cerrar el modal al hacer clic fuera del contenido del modal
        // Cerrar el modal al hacer clic en el botón de cierre
        cerrar.addEventListener("click", closeModal);
