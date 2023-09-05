@@ -217,12 +217,15 @@ canvas {
       margin: 0;
 }
 #cerrar{
+   border-radius :25px ;
+   border: none;
 position:absolute ;
 top: 0;
+color: white ;
       left: 0;
    z-index: 1000;
-   
-}
+   background: rgba(0,0,0,0.9);
+    }
   </style>
 </head>
     <script src="https://kit.fontawesome.com/32ac7cd722.js" crossorigin="anonymous"></script>
@@ -231,7 +234,7 @@ top: 0;
 <!-- Agrega un campo de búsqueda y un botón de búsqueda -->
 <!---Envivo---->
 <span id="enVivoP">
-     <button id="cerrar">X</button>
+        <button id="cerrar"><i class="fa-solid fa-arrow-left"></i></button>
    <iframe id="iframeEnVivo" src=""></iframe>
 </span>
 
