@@ -1,492 +1,903 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Interfaz de Películas</title>
-<link rel="stylesheet" href="https://dl.dropbox.com/scl/fi/xbpt2tzdsca3o2jvulqvo/cssplantilla.css?rlkey=75yw37hsshehx7buifr3j0xs2">
-<link rel="stylesheet" href="https://dl.dropbox.com/scl/fi/uk7bfvwowsduyprvrzcki/styloEnVibo.css?rlkey=8ogjx8mw4r4012vlmgaasku93">
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Josefin+Sans:wght@100&display=swap" rel="stylesheet">
+    <title>Interfaz de Canales de TV</title>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+    <style>
+    html {
+  scroll-snap-type: y mandatory;
+  max-width : 100%;
+}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+                    }
+       #contenedorCanales{
+         
+       }
 
-<link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
-  <style>
-     .logo-containerIcono {
-        display: flex ;
-  font-family: 'Rowdies', cursive;
-  font-size: 14px;
-  color: white;
-  cursor: pointer;
-  z-index: 1;
-  filter: hue-rotate(230deg) saturate(179%);
-position: sticky;
-   top: 5px ;
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #1f2532;
+            color: #fff;
+            
+            font-size: 13px;
+        }
+
+        .barra-navegacion {
+            background-color: #1f2532;
+            overflow: hidden;
+            text-align: center;
+            padding: 6px 0;
+            position: fixed ;
+            top: 0px ;
+            width: 100%;
+            z-index :1;
+            scroll-snap-align: start;
+          scroll-snap-stop: always;
+display: flex;
+place-content: center ;
+overflow: auto ;
+        }
+
+        .barra-navegacion a {
+            display: grid;
+            font-size :10px ;
+            color: white;
+            text-align: center;
+            padding: 0px 25px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+           -webkit-text-stroke: 0.4px white; ;
+        }
+
+        .barra-navegacion a:hover {
+            background-color: #2c3648;
+        }
+
+        .seccion {
+          display: flex ;
+          flex-wrap: wrap ;
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+            height: auto;
+            overflow: hidden ;
+            scroll-snap-align: start;
+          scroll-snap-stop: always; /* Asegura que el snap sea efectivo */
+        }
+
+        .seccion-titulo {
+          padding-top :10px ;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #1f2532;
+            font-family: monospace;
+            -webkit-text-stroke : 0.1px black ;
+            
+            
+            font-family: 'Rowdies', cursive;
+        }
+.canale{
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: auto ;
+  margin-top: 5px;
+}
+        .canal {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: auto;
+            display: inline-block;
+            vertical-align: top;
+            position: sticky;
+        }
+
+        .canal img {
+            width:60px ;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            background-color: #fff;
+        }
+
+        .canal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .slick-prev,
+        .slick-next {
+            font-size: 30px;
+            color: #1f2532;
+            transition: color 0.3s;
+            
+        }
+
+        .slick-prev:hover,
+        .slick-next:hover {
+            color: #2c3648;
+        }
+
+        .slick-prev {
+            left: -30px;
+        }
+
+        .slick-next {
+            right: -30px;
+        }
+      /* Estilos para el modal arrastrable */
+.modal-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 100%;
+            height: 100vh;
+            overflow: auto;
+            animation: modal 0.3s ease-in-out;
+            background: black;
+
+        }
+@keyframes modal{
+  0%{scale: 1.06;
+    opacity: 0.8 ;
+  }
+  100%{scale: 1;
+    opacity: 1 ;
+  }
+}
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+        padding: 20px;
+        max-width: 80%;
+        max-height: 80%;
+        overflow: auto;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .modal-title {
+        font-weight: bold ;
+        font-family: monospace ;
+        margin: 10px auto ;
+        font-size: 24px;
+        color: darkgrey;
+        -webkit-text-stroke:0.1px darkgrey;
+     font-family: 'Rowdies', cursive;
+      }
+
+      .modal-close {
+   margin-right: 20px ;
+        cursor: pointer;
+        font-size: 24px;
+        color: #888;
+          -webkit-text-stroke:0.5px darkgrey;
+
+      }
+#videoCanal{
    
-  background: linear-gradient(to left, yellow, gold, 0.5);
-  filter: hue-rotate(877deg) saturate(20%);
-
 }
-
-.link-iconIcono {
-  width: auto;
-  height: auto;
-  margin-right: 3px;
-  animation: bounce2 1s infinite;
+.modal-container.active {
+    display: flex;
+    pointer-events: auto; /* Permite la interacción solo con el modal abierto */
 }
-
-@keyframes bounce2 {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-1px);
-  }
-}
-
-
-
-
-.stream-textIcono {
-  font-size: 10px;
-  height: 9px;
-  background: linear-gradient(to right, #F47B32, #DB3C2A);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: red;
-  opacity: 0; 
-  animation: streamFadeIn2 2s forwards;
-
-border-radius :3px ;
-margin: 0;
-padding: 0;
--webkit-text-stroke : 0.00px white;
-}
-  
-@keyframes streamFadeIn2 {
-  0% {opacity: 0;}  
-  100% {opacity: 0.8;}
-}
-
-/****PABTALLA DE CARAGA**/
-.logo-container {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 64px;
-  color: white;
+/**fullscreem***/
+#fullscreen-btn {
+  background-color: transparent;
+  border: none;
+  color: gray;
+  font-size: 18px;
   cursor: pointer;
-  z-index: 1;
- 
 }
 
-.link-icon {
-  width: 72px;
-  height: 72px;
-  margin-right: 5px;
-  animation: bounce 1s infinite;
-   -webkit-text-stroke: 1px white;
+#fullscreen-btn:hover {
+  color: #333;
 }
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.glitch {
-  color: white;
-  position: relative;
-  animation: glitch 600ms infinite;
-}
-
-@keyframes glitch {
-  0% {clip: rect(36px, 9999px, 99px, 0)}
-  5% {clip: rect(25px, 9999px, 99px, 0)}
-  10% {clip: rect(30px, 9999px, 66px, 0)}
-  15% {clip: rect(26px, 9999px, 22px, 0)}
-  20% {clip: rect(91px, 9999px, 96px, 0)}
-  25% {clip: rect(2px, 9999px, 53px, 0)}
-  30% {clip: rect(75px, 9999px, 57px, 0)}
-  35% {clip: rect(66px, 9999px, 93px, 0)}
-  40% {clip: rect(5px, 9999px, 18px, 0)}
-  45% {clip: rect(88px, 9999px, 15px, 0)}
-  50% {clip: rect(67px, 9999px, 47px, 0)}
-  55% {clip: rect(24px, 9999px, 11px, 0)}
-  60% {clip: rect(28px, 9999px, 71px, 0)}
-  65% {clip: rect(51px, 9999px, 37px, 0)}
-  70% {clip: rect(92px, 9999px, 70px, 0)}
-  75% {clip: rect(46px, 9999px, 14px, 0)}
-  80% {clip: rect(63px, 9999px, 3px, 0)}
-  85% {clip: rect(16px, 9999px, 24px, 0)}
-  90% {clip: rect(77px, 9999px, 91px, 0)}
-  95% {clip: rect(62px, 9999px, 100%, 0)}
-  100% {clip: rect(85px, 9999px, 29px, 0)}  
-}
-
-.stream-text {
-    -webkit-text-stroke :2.2px white ;
-   font-family: 'Rowdies', cursive;
-  font-size: 68px;
-  background: linear-gradient(to right, #F47B32, #DB3C2A);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  opacity: 0; 
-  animation: streamFadeIn 2s forwards;
-}
+#seccionMostrar{
+  width:100%;
+  padding-top :-45px;
+  display:grid ;
+  opacity:0;
   
-@keyframes streamFadeIn {
-  0% {opacity: 0;}  
-  100% {opacity: 1;}
+  overflow:hidden ;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  transition: 1.31s opacity ;
 }
-
-canvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.popupcarga {
-   
-
-  background: linear-gradient(to left, yellow, gold, 0.5);
-  filter: hue-rotate(877deg) saturate(20%);
-
-  overflow: hidden;
-
-
-  margin: 0;
+.ultimosVisitados{
+  
   
   display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  position: fixed;
-  z-index: 1000; 
-  width: 100%;
-  height: 100vh;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.5s; 
   
 }
-
-.show {
-  opacity: 1; 
+#seccionMostrar{
+  background: rgba(20,50,100,0.7);
+  display: flex :
+  overflow: auto;
 }
-#enVivoP{
-   background: rgba(0, 0, 0, 0.8);
-      position: fixed;
-      top: 0;
-      left: 0;
-      border: 0;
-      padding: 0;
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      margin: 0;
-      font-family: 'ZCOOL KuaiLe', cursive; 
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-  /* Imagen de fondo */
-  
-  background-repeat: no-repeat; 
-  background-size: cover;
-  background-blend-mode: multiply;
-  background-color: rgba(0,0,0,0.5);
-  background-attachment: fixed;
+#seccionMostrar h5{
+margin-left :10px ;
+color: white;
+-webkit-text-stroke : 0.3px white;
 
 }
-#iframeEnVivo{
-   background: rgba(0, 0, 0, 0.8);
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+.contenidoVisitados{
+  background:red;
+  overflow:auto ;
+  place-content :center ;
+  place-items : center;
+  background:transparent ;
+
+}
+.contenidoVisitados img {
+  width: 30px ;
+  height :30px ;
+            position : relative ;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            background-color: #fff;
+        }
+        .contenidoVisitados .slick-initialized {
+          
+        font-size :10px ;
+          width: 100% ;
+          height : 50px;
+          padding:0;
+          margin:0;
+          border:0;
+          padding-left :10px;
+        }
+
+.clone{
+  background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: auto;
+            display: inline-block;
+            vertical-align: top;
+            position: sticky;
+}
+  .favorito{
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><pattern id="diagonalHatch" patternUnits="userSpaceOnUse" width="10" height="10"><path d="M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2" stroke="gold" opacity="0.9" /></pattern></defs><rect width="100" height="100" fill="url(%23diagonalHatch)" /></svg>'); /* Patrón con líneas diagonales doradas */
+            padding: 20px;
+            border-radius: 10px;
+            margin:  10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
       
-      padding: 0;
-      margin: 0;
+    border: 2px solid tomato;
+  }
+  button{
+    position: relative ;
+    border-radius : 10px ;
+    border: 0px ;
+    left: 20px ;
+  }
+          .pin-icon {
+            position: relative ;
+            font-size: 1em; /* Tamaño del icono */
+            color:black ;    /*#ffd700 Color dorado */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Sombra dorada */
+            
+        }   
+        .marcado {
+    background-color: #ffd700; /* Cambia el color de fondo cuando es favorito */
+    color: white; /* Cambia el color del texto cuando es favorito */
+    border: none; /* Quita el borde */
+    /* Otros estilos según tus preferencias */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Sombra dorada */
 }
-#cerrar{
-   border-radius :25px ;
-   border: none;
-position:absolute ;
-top: 0;
-color: white ;
-      left: 0;
-   z-index: 1000;
-   background: rgba(0,0,0,0.9);
-    }
-  </style>
+
+    </style>
+        <script src="https://kit.fontawesome.com/32ac7cd722.js" crossorigin="anonymous"></script>
 </head>
-    <script src="https://kit.fontawesome.com/32ac7cd722.js" crossorigin="anonymous"></script>
 <body>
-  
-<!-- Agrega un campo de búsqueda y un botón de búsqueda -->
-<!---Envivo---->
-<span id="enVivoP">
-        <button id="cerrar"><i class="fa-solid fa-arrow-left"></i></button>
-   <iframe id="iframeEnVivo" src=""></iframe>
-</span>
 
-<div class="referencias_C" id="referencias_CID">
-   <div class="logo-containerIcono">
-  <i class="fas fa-link link-iconIcono"></i>
-  <span class="stream-textIcono">Stream</span>
+    <h1 id="canalesTitulo" style="display:none">Canales de TV</h1>
+    
+    <nav class="barra-navegacion">
+      
+   <a href="#" style="width: auto; height: auto; margin-left:-30px; display: none"> <button style="background: gold; text-shadow: 0px 1px black"><i class="fa-solid fa-clapperboard"></i><h2 style="font-size: 3px; text-shadow: 0px 0px ;-webkit-text-stroke:0.3px black">movies</h2></button></a>
+    
+          <a href="#" id="navTodos" onclick="mostrarTodos()" style="font-size: 15px ;position: relative; left:0; border-right: 0px gold outset; width: 20px;margin-left: -10px"><i class="fa-solid fa-border-all" style="font-size: 15px;"></i>Todos</a>
+          <hr style="margin-left: 10px; height: auto; box-shadow: 0px 2px 5px 1px gray">
+    <div style="display: flex; width: auto;overflow: auto">
+        <a href="#" onclick="mostrarCategoria('cine')" ><i class="fa-solid fa-video" style="font-size: 15px"></i>Cine</a>
+        <a href="#" onclick="mostrarCategoria('Deportes')" ><i class="fa-solid fa-futbol" style="font-size: 15px"></i>Deportes</a>
+        <a href="#" onclick="mostrarCategoria('Mas canales')" ><i class="fa-solid fa-box-open" style="font-size: 15px"></i>Mas canales</a>
+        <a href="#" onclick="mostrarCategoria('Entretenimiento')" ><i class="fa-solid fa-icons" style="font-size: 15px"></i>Entretenimiento</a>
+        
+        </div>
+        <!-- Agrega más categorías aquí -->
+    </nav>
+      
+      <!----BAse Dom-->
+       <div id="base_Dom">
+        <div id="seccionMostrar">
+          <h5>vistos recientemente</h5>
+          <span class="contenidoVisitados" >
+  <span id="ultimosVisitados" class="ultimosVisitados"></span>
+          </span>
+        
+        </div>
+    <div id="contenedorCanales">
+        <!-- Aquí se generarán las secciones de canales dinámicamente -->
+    </div>
+    
+    <!-- Modal arrastrable -->
+    <div id="modal" class="modal-container">
+        <div class="modal-header">
+            <div class="modal-title">Canal 1</div>
+            <div class="modal-close" onclick="cerrarModal()">x</div>
+        </div>
+        <div class="modal-content">
+<video id="videoCanal" src="" controls style="width: 100%; height: 400px"></video>
+<!--iframe-->
+<div id="c_Iframe" style="display:none;width: 100%; height: 400px">
+<iframe src="" frameborder="0" id="iframe1"  style="width: 100%; height: 400px"></iframe>
+   <button id="fullscreen-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i> </button>
 </div>
-<!--buscador--->
- <div class="sidebar">
-
-  <div class="icon-container">
-    <i class="fas fa-search" id="searchIcon"></i>
-    <!-- Agrega más iconos según tus necesidades -->
-  </div>
+        </div>
+    </div>
 </div>
-
-<div class="barraNavigacion" >
-   
-         <span class="todas clickefect1" onclick="pag_global()"><i class="fa-solid fa-house"></i ></span>
-        <!---Em vvivo btn---->     
-<span class="todas clickefect1" id="enVivoBtn" style="font-size:7px;display:none"><i class="fa-solid fa-tv" style="font-size:10px"></i>TV<hr></span>
-    <!---Tv---->     
-<a href='go:me'><span class="todas clickefect1" id="cineVivoBtn" style="font-size:7px;display: grid;padding:10px"><i class="fa-solid fa-tv" style="font-size:15px;"></i>T</i>V</span><div class="referencias_C2">
-</a>
-    <!-- Referencias para los géneros -->
-  <div class="contenedor_referencia">
-  <span class="referencia clickefect1" onclick="agregarReferencia('accion')" style="display: flex"><i class="fa-solid fa-gun"></i>Accion</span>
-  <span class="referencia clickefect1" onclick="agregarReferencia('comedia')"style="display: flex"><i class="fa-solid fa-masks-theater"></i>Comedia</span>
-  <span class="referencia clickefect1" onclick="agregarReferencia('drama')"style="display: flex"><i class="fa-brands fa-fort-awesome-alt"></i>Drama</span>
-  <span class="referencia clickefect1" onclick="agregarReferencia('suspenso')"style="display: flex"><i class="fa-solid fa-mask" ></i>suspenso</span>
-  <span class="referencia clickefect1" onclick="agregarReferencia('terror')"style="display: flex"><i class="fa-solid fa-ghost" ></i>Terror</span>
-  <span class="referencia clickefect1" onclick="agregarReferencia('animacion')"style="display: flex"><i class="fa-solid fa-robot"></i>infantiles</span>
-  <!-- Agrega más referencias de género según tus necesidades -->
-
-  <!-- Referencias para los años -->
-  <span class="referencia clickefect1" onclick="agregarReferencia('misterio')"style="display: flex"><i class="fa-solid fa-user-secret" ></i>Misterio</span>
-  <span class="referencia clickefect1" onclick="agregarReferencia('romance')"style="display: flex"><i class="fa-brands fa-gratipay" ></i>Romance</span>
-    <span class="referencia clickefect1" onclick="agregarReferencia('ciencia ficcion')"style="display: flex"><i class="fa-solid fa-explosion" ></i>C.ficcion</span>
-      <span class="referencia clickefect1" onclick="agregarReferencia('documental')"style="display: flex"><i class="fa-solid fa-file-video" ></i>Documental</span>
-   <!--  <span class="referencia" onclick="agregarReferencia('2022')">2022</span>
-Agrega más referencias de año según tus necesidades -->
+<!----espacio -->
+<!----PELICULAS- opcional--->
+<div id="BaseIframe">
 
 </div>
-  </div>
-   </div>
-  </div>
+      <script>
+        let lastScrollTop = 0;
+        let barraNavegacion = document.querySelector('nav');
+    
+        function tuFuncion() {
+          barraNavegacion.style.position = 'fixed';
+          barraNavegacion.style.animation = 'fadeIn 0.2s ease-out forwards';
+        };
+    
+        window.addEventListener("scroll", function() {
+          let st = window.pageYOffset || document.documentElement.scrollTop;
+    
+          if (st < lastScrollTop) {
+            // Scroll hacia arriba
+            tuFuncion(); // Reemplaza 'tuFuncion' con la función que deseas ejecutar
+    
+          } else {
+            if (st > window.innerHeight) {
+              // Scroll mayor a 100vh'absolute'
+              barraNavegacion.style.position = 'absolute';
+              barraNavegacion.style.animation = ''; // Reemplaza 'otraFuncion' con la función que deseas ejecutar
+            }
+    
+    
+          }
+    
+          lastScrollTop = st <= 0 ? 0 : st;
+        }, false);
+      </script>
+    <script>
+        // Supongamos que tienes un arreglo llamado 'canales' con categorías
+        var canales = [
+          { nombre: 'star Action', logo: 'https://dl.dropbox.com/scl/fi/c3x3oviqck9oesliksjxj/Programaci-n-Star-Action-Oeste-Hoy-_-Programaci-n-de-TV-en.png?rlkey=i3a6me09dw9rv4mxuc5k8b3xi', categoria: 'cine', enlace:'https://embed.telextrema.com/embed/staraction.html' ,iframe:true},
+          { nombre: 'TNT', logo: 'https://dl.dropbox.com/scl/fi/h4n08vt2dkgfg26ej1adz/Logo_TNT_Series.png?rlkey=36s3yi6hm8wspc4itcyjttf6p', categoria: 'cine',enlace:'https://embed.telextrema.com/embed2/tnt.html',
+                iframe:true},
+                 { nombre: 'HBO PLUS', logo: 'https://dl.dropbox.com/scl/fi/dywtwm55w1fwlcofmurfc/HBO_Plus.png?rlkey=m5rntdmc2sbpci27ugt9fvoi9', categoria: 'cine',enlace:'https://clarovideo.vtvcable.com/HBOMAX/?url=aHR0cHM6Ly9sYXRhbXZvc2xpdmVjbGFyb3ZpZGVvLmFrYW1haXplZC5uZXQvQ29udGVudC9EQVNIX0RBU0hfRksvTGl2ZS9DaGFubmVsKEhCT19QTFVTX0hEX01YKS9tYW5pZmVzdC5tcGQ=&key=OGM2ZTkzM2YzMTU1NzhiNTExMWUyMjkyZmFmOTlmNzA=&key2=MzQ0NmYzNTk0Nzk1N2QzNzAxYzQ5ZmQxNzI5ZjIxNmY=&lang=1',
+                iframe:true},
+               { nombre: 'GOLDEN PLUS', logo: 'https://dl.dropbox.com/scl/fi/7uxvaqc2086vpmnw9n0tm/golden-plus.png?rlkey=2tvcqq0060ub9ppv3y6rakg8u', categoria: 'cine',enlace:'https://embed.telextrema.com/embed2/goldenplus.html',
+                iframe:true},
+                { nombre: 'GOLDEN PREMIER', logo: 'https://dl.dropbox.com/scl/fi/l7tugrcbs7pvx0d18c27r/golden-premier-2.png?rlkey=xhqwv2q1470c96hdi31levsvu', categoria: 'cine',enlace:'https://embed.telextrema.com/embed2/goldenpremier.html',
+                iframe:true},
+                { nombre: 'HBO 2', logo: 'https://dl.dropbox.com/scl/fi/p6uevqm0o7e96oqcsehjj/images.png?rlkey=q6ozu3proj5h3bo25l6xxuovp', categoria: 'cine',enlace:'https://clarovideo.vtvcable.com/HBOMAX/?url=aHR0cHM6Ly9sYXRhbXZvc2xpdmVjbGFyb3ZpZGVvLmFrYW1haXplZC5uZXQvQ29udGVudC9EQVNIX0RBU0hfRksvTGl2ZS9DaGFubmVsKEhCTzJfSERfTVgpL21hbmlmZXN0Lm1wZA==&key=MmQyMzQ4N2I1Yjg4MWU0NGJhMGZhYjk3NTlmZDg1YTM=&key2=MDI5YzdmMTI4OTkzMDM0YWRmZTRiYzRlOTUxNDA0MjQ=&lang=1',
+                iframe:true},
+               // { nombre: 'SPACE', logo: 'https://dl.dropbox.com/scl/fi/em9j0avcw152gce4z6dsr/cl_space_m.png?rlkey=xkjnumgzc0xxbp77k9narpew7', categoria: 'cine',enlace:'https://video-weaver.mia05.hls.ttvnw.net/v1/playlist/CrkF9oPrTFuwPZGsg5KR59BW_bvQ3I8B---EhDV6pdU2NVhyXi5k2eJk2o9jKZ8y7fPLx_nwcVACJ31upEOe_yfq6ibyE3ktOhMe18p6_Vuw1T5OpZjj-6h1Kky0BB7gSysyWnbOfHQCsD3P-84R8h9dXz7vLCKBWuHbZYy7Gi2HcgngcwGDm5tzMJ2zTQm8YQiNd3j4boQq_5jy4ty7c_v_jvmtzVi_dC99TA1Mn3kVmnmuE1FLX_viVeJFJOMBvYw9Qd0a1T7RA4XUcoTp_1r2hFLcNqPYupDHYkMQhtNDFhESUnomEg9g8nzotYnfDenmL7bIz9zg0GsSzhlcND_O0letgtZF2HsZ0Afnyr-qdaKqDD54styg6701BjfgrXBv1e1dLYiBiPgQYhHdDneyiyxg5AhkIBvDP_VptAgtqK9F3c31wH-JAuwXvYkEyZbusz9INQxwU4yZ5bkLEJQtd_HVtSMQN0qKcv-fFzRrLlKl-sLnWHsmzqMFg4nb5AarJITpiwLS2TIAfpEGdVdqeBCmsZkOJBHUhRRdTLdH_MfN9sd8Ea4g0YBreS_vEymjW7mGXV5r6KYRPkLivgF1Rj9Jk3af71a4fQaGJnRbpzs6uqb47A0C6MtIF5pmdMd9UAn9U8lrMEa7zZSqAgLg3hXAxrUSNC-bx-HaUEPvC-cvue5PdrQZxdEtEss5DCcMtnvdpOPQGJB706UvLryE5GWo-dI9FhDq91Hatw43lxSv0-1c_8Hm8KhBKUTB1I-RZJqVBWR2goB0pdtrc5zJ4g7cZp6QpZUFMxexlO1RTobByg8khN0IyH_i3I3cDNMkV8f_ROWT8pxHEVAtb3fdGPsNZUMxY_yDeKl3wNGI3k7iGlFu4vlGI_K4U3RWlgzoYG_KDHOI-5kB4CZE7UUSNfxKBCoq5_0aWBoMz5eYv4btZfvkv6zoIAEqCWV1LXdlc3QtMjDnBw.m3u8',
+               // iframe:false},
+                { nombre: 'RUNTIME SERIES', logo: 'https://dl.dropbox.com/scl/fi/ej755lkqbk8d7q1urkrse/runtime-1000x600.jpg?rlkey=39aa19vzotrt5afmfqehm514v', categoria: 'cine',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=3434',
+                iframe:false},
+                { nombre: 'GOLDEN EDGE', logo: 'https://dl.dropbox.com/scl/fi/1hgg1nrwjtemswf0yy3dc/golde-edge.png?rlkey=ewf4anj39figaaqyi0k2hz8xp', categoria: 'cine',enlace:'https://embed.telextrema.com/embed2/goldenedge.html',
+                iframe:true},
+            { nombre: 'cineAR', logo: 'https://dl.dropbox.com/scl/fi/a4rrggvvp1s3i7kf46q4h/CINE.AR-PLAY_Amazon.es_Appstore-for-Android.png?rlkey=wya32g6vt2a6z20lout0p73hp', categoria: 'cine', enlace:'https://538d0bde28ccf.streamlock.net/live-cont.ar/cinear/playlist.m3u8' },
+            { nombre: 'Canela.tv', logo: 'https://dl.dropbox.com/scl/fi/j70twuo549qmd71xsxwsj/Categor-a_Pel-culas-y-series-disponibles-en-Canela-TV.png?rlkey=hb5n5l4csb28811vfdn54r5uh', categoria: 'cine',enlace:'https://ov.ottera.tv/channels/cnm_ctm_ro/master.m3u8' },
+            { nombre: 'Todo cine', logo: 'https://dl.dropbox.com/scl/fi/iesudcpt2k2gdgoe9d4p8/SUS-Producciones-_.jpg?rlkey=n5k77brpa44bj3y967zp1sdhr', categoria: 'cine',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=4565' },
+            { nombre: 'CineKids', logo: 'https://dl.dropbox.com/scl/fi/g0wx2ibyvxa2okx90zmax/CineKids.png?rlkey=vnw0t8j2gs6zzfqhqywqgucva', categoria: 'cine',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=3506' },
+            { nombre: 'Runtime Tv', logo: 'https://dl.dropbox.com/scl/fi/autiumpajj1yjgxfmk593/Runtime-Espa-ol-_-Runtime.jpg?rlkey=paqmfju3x30ebog1jbul3ddw5', categoria: 'cine',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=2649' },
+            { nombre: 'Cine Romantico', logo: 'https://dl.dropbox.com/scl/fi/twgrgdj8p4n885e2o1i8s/UP-Entertainment-en-asociaci-n-con-PixL-Dos-present-el.jpg?rlkey=x5inaildtldnw3u52wtjv3wll', categoria: 'cine',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=656' },
+               { nombre: 'Runtime Comedia ', logo: 'https://dl.dropbox.com/scl/fi/xhvztbe7gb7rbtkamwdo8/Runtime-Comedia-Espa-ol.webp?rlkey=mohrbs476g36d5vtyhlvm9yn0', categoria: 'cine',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=3057' },
+                  { nombre: 'Runtime Crimen', logo: 'https://dl.dropbox.com/scl/fi/9q3jdn5i7rfges4ubttw7/Runtime-Crimen.webp?rlkey=nomiynnccufys3pvl0lngapaf', categoria: 'cine',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=3527' }
+,   { nombre: 'Canela Cinema 2', logo: 'https://dl.dropbox.com/scl/fi/1tf3rpj9xei1i4yomm6sy/Canela-Cinema-2.webp?rlkey=hznkeoazmssqzbrhvzh6puqe8', categoria: 'cine',enlace:'https://ov.ottera.tv/channels/cnm_cn_mv_mx/master.m3u8' },
+   { nombre: 'Top Cine', logo: 'https://dl.dropbox.com/scl/fi/93tqscwfi5dyew4luji8s/Top-Cine.png?rlkey=iztm29kjejp8y2mngrqvq0v0w', categoria: 'cine',enlace:'https://topcinelatam-freetv.amagi.tv/TopCineLATAMx/master.m3u8' },
+      { nombre: 'Runtime Accion', logo: 'https://dl.dropbox.com/scl/fi/4w0m47h09zlu5v3vrqosx/Runtime-Acci-n.webp?rlkey=10k9tr6pv7ev3u8pmo0i4yaqs', categoria: 'cine',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=3058' },
+            // Agrega más canales aquí
+            //Deportes
+                { nombre: 'espn', logo: 'https://dl.dropbox.com/scl/fi/op8q8c2nbd5rmz1y3qqq8/espn-logo-0.png?rlkey=daf9dy2zrps0cqppvs6bfqgwj', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/espn.html',
+                iframe:true},
+                { nombre: 'espn2', logo: 'https://dl.dropbox.com/scl/fi/th7g1dafpblpw61ay1l5v/ESPN2-Logo-PNG-vector-in-SVG-PDF-AI-CDR-format.jpg?rlkey=7ap69dh7h7gfazlqc6ujtbz9f', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed/espn2.html',
+                iframe:true} ,
+               { nombre: 'espn3', logo: 'https://dl.dropbox.com/scl/fi/dvtapj9c2p4pck04fnscg/ESPN3-Now-Available-to-Optimum-Online-Customers-ESPN-Press.jpg?rlkey=yiyp02ayqy9ttahviz67zi5g7', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed/espn3.html',
+                iframe:true},
+               { nombre: 'foxsports', logo: 'https://dl.dropbox.com/scl/fi/dlqoh6pwrookyt8t8a50r/Fox-Sports-Logo-PNG-vector-in-SVG-PDF-AI-CDR-format.jpg?rlkey=x2c1aczg9fr0mqekfp1pumcjp', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed/foxsports.html',
+                iframe:true},
+                { nombre: 'foxsports2', logo: 'https://dl.dropbox.com/scl/fi/3u0jhoh39mcmaa6oe0jt2/Archivo_Fox-Sports-2-Argentina-2023.svg-Wikipedia-la.png?rlkey=xiuogocfdh82hp0is19p129d6', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed/foxsports2.html',
+                iframe:true},
+                { nombre: 'tycsports', logo: 'https://dl.dropbox.com/scl/fi/yjf820loryzka31vx4bwv/TyC-Sports-Logo-PNG-vector-in-SVG-PDF-AI-CDR-format.webp?rlkey=onmsplxesqlv9dj39nep9uaty', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed/tycsports.html',
+                iframe:true},
+                { nombre: 'directvsports', logo: 'https://dl.dropbox.com/scl/fi/4bnmc803rpqzbhv1wsy1w/Qu-es-DirecTV-Sports-y-c-mo-verlo.webp?rlkey=ckowo26euv1s3bdr71bb8u5ig', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed/directvsports.html',
+                iframe:true},
+                { nombre: 'BEIN LA LIGA', logo: 'https://dl.dropbox.com/scl/fi/0q0778n0qsmnpdms2hp03/beIN-Sports-LaLiga.jpg?rlkey=mjowzuputwycqqanp5qskttlv', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed/beinlaliga.html',
+                iframe:true},
+                { nombre: 'Afizzionados', logo: 'https://dl.dropbox.com/scl/fi/iwj5o2cwzvt9dhwnx4wjh/afizzionados-futbol-logo.jpg?rlkey=u7wg3fpse97qw4mhozjonzcr3', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/afizzionados.html',
+                iframe:true},
+                { nombre: 'FOX SPORTS PREMIUM', logo: 'https://dl.dropbox.com/scl/fi/6qrhjlzf64bv63eo2qh2f/HDFAZLSP7FH7XJK2XFRO56O22U.jpeg?rlkey=g0243jhl9cmf5juhaa8nod9tn', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/foxsportspremium.html',
+                iframe:true},
+                { nombre: 'FOX SPORTS 3 MEXICO', logo: 'https://dl.dropbox.com/scl/fi/oax1suom7cffgjlviyahn/1200px-Fox_sports_3_logo.svg.png?rlkey=86omabz9s9l61fxnijievb4yz', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/foxsports3mexico.html',
+                iframe:true},
+                { nombre: 'ESPN 3 MEXICO', logo: 'https://dl.dropbox.com/scl/fi/b9pddgi2wtuwyu09kamig/hn_espn-3_m.png?rlkey=m975sbnd11dlzlpd4s0ocf1cu', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/espn3mexico.html',
+                iframe:true},
+                { nombre: 'ESPN 2 MEXICO', logo: 'https://dl.dropbox.com/scl/fi/39on8n6s3le8ofrd2y4ox/espn2-mexico.png?rlkey=kw5mdcrm4yy4hc2i0czvfuez1', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/espn2mexico.html',
+                iframe:true},
+                { nombre: 'ESPN MEXICO', logo: 'https://dl.dropbox.com/scl/fi/wg41ocn4bhv25tjtdhnnu/i.png?rlkey=gbvk339gv9at55bha2treulu8', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/espnmexico.html',
+                iframe:true},
+                { nombre: 'FOX SPORTS 2 MEXICO', logo: 'https://dl.dropbox.com/scl/fi/hicd18g8ngikmzojfosoe/2015_Fox_sports_logo.svg.png?rlkey=7yq3uj4d0ipnqbrfy39nuizd5', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/foxsports2mexico.html',
+                iframe:true},
+                { nombre: 'FOX SPORTS MEXICO', logo: 'https://dl.dropbox.com/scl/fi/fxqvm5ublxqhesj4c3cm0/FOX_Sports_logo.svg.png?rlkey=obqtlm7z5a74wksbhdyt671a7', categoria: 'Deportes',enlace:'https://embed.telextrema.com/embed2/foxsportsmexico.html',
+                iframe:true},
+                //INFANTILES 
+               { nombre: 'Cartoon Network', logo: 'https://dl.dropbox.com/scl/fi/fjsu5etajo2p79ldoyakr/Cartoon-Network-logo.jpg?rlkey=oz6flt52aujwzvapi7i9o697u', categoria: 'infantiles',enlace:'https://playout.cdn.cartoonnetwork.com.br/playout_02/playlist-720p.m3u8' ,iframe:false},
+               { nombre: 'PEQUEDARIO TV', logo: 'https://dl.dropbox.com/scl/fi/1t5j0o82164yjb1zubry1/PequeRadio-TV-en-DIRECTO-Online.png?rlkey=j3nqko8uqgmaaqgkr1nmitpo8', categoria: 'infantiles',enlace:'https://canadaremar2.todostreaming.es/live/peque-pequetv.m3u8' ,iframe:false},
+             //  { nombre: 'NICK', logo: 'https://dl.dropbox.com/scl/fi/ek5u2r5ox83b0mfuvkz2m/descarga-4.jpeg?rlkey=h9bt8bkmwtymtzsjsclq0lw9b', categoria: 'infantiles',enlace:'https://video-weaver.mia05.hls.ttvnw.net/v1/playlist/CrkFPi3e9-o4hHUwarw5-UMCkjKFqPsO0VMEhJ8Nqm23BQ7ZivUxirh2bFsbuDbuMb5yvEvsa3ViFlQEV_UKXpvOzW4dLjeS5wX2jBv_JGO7rhBgZchApMYj8BpRei1vvUzSH63I7hpaULe7K-y6dU6cDchOz47WcXlo5nvn_VicZ8z8FQ6VHTpOvDTOpWsdtwChbyWo3wHhj_RKLYh_FCryR-QPVreYd9ABdYpqeD5-T8A-Qxlg1JmhXInJ1lXTZs5Pgc1y4zGWx161xQOZS76cfcsR60LuEuUHv7w9PSwT4D1Kp7THGU7NvOLyV-bWV5RNB35UhzvJ7R_PwfCCJW5Moq0dN-Lyox4ERN-AbKXKZmJssOPq5UK47znuY9HV5iDh8w-ffYjnT3BqzOptzEiXtLDVKcQ2yYnjA3K89tIydpzo3CQpjaeajjtMTYTE5cnFrr_sCIwTVXq2joNHJOBBHt7FWFVVbjXHx25QRXY7kjHZs6yM5ROoG9xqWQtdi-NC2h5GdTvsr6rGWIfY51PyuPfXBLpT-VUVzvvtizwB0MgmY1BD0fJOJqbcT_1iitoJHR9vTxSYMJQ_TfqmhcZPv8sP8ZjuRfI7ysAy-Xst49egPe5yIEnavbRJP-Ny5a5SKGLqBYegDKVe6wmjNnD_JDUa8-yLgKlV6ipIty90seqaTIGcpGFk3ObDAJ7vXCYRXZ0a8atIifecR8R5F0xeUp_eluHCUPCkmdXnPkbjVWzSK2aSi_xlYx1mxCTBy_2TbnPXZ1igrpYzhK-c55iaG8S_hXChrYI8_j3kx5y1CtEY2f3JuEspwmm3f69iOHJcSjV9N0rjIrRQC_fIhSR6ULtlIS9VdyB66wgTGEvK1MDQVpZdO87hSOsyC3TjcdNGZJMgieTLjyFjvzzBZxzODOENN7UsJvvzwhoMXCOAJgtufGwDdDlFIAEqCWV1LXdlc3QtMjDnBw.m3u8' ,iframe:false},
 
-<form id="formBusqueda">
-   <button type="button" id="closeButton_busqueda"><i class="fas fa-times"></i></button>
-
-   <div class="entrada_buaqueda">
-  <!-- Campo de búsqueda -->
-  <input type="text" id="searchInput" placeholder="Buscar pelicula">
-    <!-- Botón de búsqueda -->
-  <button type="button" id="searchButton">Buscar</button>
-  </div>
 
 
-</form>
 
-   <!-- Contenedor para el spinner de carga -->
-<div id="spinnerContainer" class="spinner-container">
-   <!------
-  <div class="spinner"></div>
-  --->
-  <div class="popupcarga">
+                //ENTRETENIMIENTO
+                { nombre: 'AZTECA 7', logo: 'https://dl.dropbox.com/scl/fi/zuqfc35xrn7k34by0nrul/descarga.png?rlkey=0n9tu892geyebjni5pjoum9pn', categoria: 'Entretenimiento',enlace:'https://embed.telextrema.com/embed2/azteca7.html',
+                iframe:true},
+                { nombre: 'DISTRITO COMEDIA', logo: 'https://dl.dropbox.com/scl/fi/5fdmm9417lfoxsxmm3doy/vOM8ZHt7_400x400.jpg?rlkey=loe2i4ail2jbn796lmavjwazb', categoria: 'Entretenimiento',enlace:'https://embed.telextrema.com/embed/distritocomedia.html',
+                iframe:true},
+                { nombre: 'LAS ESTRELLAS', logo: 'https://dl.dropbox.com/scl/fi/4nh2p6h1wgrhmj5gnwelr/5DRQEVODKVA7RPXZNB6UKKXEBY.jpeg?rlkey=n4po3eyw5mx3mcja31fam03zt', categoria: 'Entretenimiento',enlace:'https://embed.telextrema.com/embed/lasestrellas.html',
+                iframe:true},
+                { nombre: 'WARNER BROS TV', logo: 'https://dl.dropbox.com/scl/fi/bu7f6z4y251kg3uk4vip6/Warner_Bros._Television_2023.svg?rlkey=jfh63l6tz2bkcp2825wljdcf1', categoria: 'Entretenimiento',enlace:'https://embed.telextrema.com/embed2/warnerbrostv.html',
+                iframe:true},
+                { nombre: 'GOLDEN EDGE', logo: 'https://dl.dropbox.com/scl/fi/1hgg1nrwjtemswf0yy3dc/golde-edge.png?rlkey=ewf4anj39figaaqyi0k2hz8xp', categoria: 'Entretenimiento',enlace:'https://embed.telextrema.com/embed2/goldenedge.html',
+                iframe:true},
+                { nombre: 'Ideas en 5 minutos', logo: 'https://dl.dropbox.com/scl/fi/2psnqq130j4tezmplvynf/descarga-1.png?rlkey=ej8rsurwipms3w60s6wo4q3nh', categoria: 'Entretenimiento',enlace:'https://amg02051-soulpublishing-amg02051c7-plex-us-306.playouts.now.amagi.tv/playlist/amg02051-amg02051c7-306/playlist.m3u8',
+                iframe:true},
+                               { nombre: 'DW - Latino America', logo: 'https://dl.dropbox.com/scl/fi/a6n2v8gbq12697lxgzhsv/DW-Latino-Am-rica.webp?rlkey=s4yoxyqtu3w78s2vjrnfpv1vr', categoria: 'Entretenimiento',enlace:'https://dwamdstream104.akamaized.net/hls/live/2015530/dwstream104/index.m3u8' ,iframe:false},
 
+               { nombre: 'Top Latino TV', logo: 'https://dl.dropbox.com/scl/fi/n56isj9tnc3usyxennupr/Top-Latino-TV.webp?rlkey=8pc4z0oy0w7ea3hidd2dgjp2f', categoria: 'Entretenimiento',enlace:'https://5cefcbf58ba2e.streamlock.net:543/tltvweb/latin-tv.stream/playlist.m3u8' },
+               { nombre: 'Canela Hits', logo: 'https://dl.dropbox.com/scl/fi/ihmg0wixym1s5rw8mfco5/Canela-Hits_1.webp?rlkey=w4tousjrilbd17lq7wc1i9yeo', categoria: 'Entretenimiento',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=1058' ,iframe:false},
+               { nombre: 'Retro Music Television', logo: 'https://dl.dropbox.com/scl/fi/wvwux9o4srkm21nwzfsdq/Retro-Music-Television.webp?rlkey=wyuhahua74p9fy62ugqf3dym5', categoria: 'Entretenimiento',enlace:'https://stream.mediawork.cz/retrotv/smil:retrotv2.smil/playlist.m3u8' ,iframe:false},
+                              { nombre: 'Nat Geo WILD', logo: 'https://dl.dropbox.com/scl/fi/9kv80ngpwxukyq3pm414w/Nat-Geo-WILD.webp?rlkey=ey16duwep1it5m035ak3kuyzk', categoria: 'Entretenimiento',enlace:'https://www.youtube.com/embed/XZ7BWbmvi94?si=dwQ5jw1jEJAe5p1l' ,iframe:true},
+               { nombre: 'Red Bull TV', logo: 'https://dl.dropbox.com/scl/fi/x5vmvg9fpl8p8d5qd0ixj/Red-Bull-TV.webp?rlkey=ema449u1dvy1ivh6924rulx43', categoria: 'Entretenimiento',enlace:'https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8' ,iframe:false},
+               { nombre: 'Red Bull TV', logo: 'https://dl.dropbox.com/scl/fi/x5vmvg9fpl8p8d5qd0ixj/Red-Bull-TV.webp?rlkey=ema449u1dvy1ivh6924rulx43', categoria: 'Entretenimiento',enlace:'https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8' ,iframe:false},
 
-<div class="logo-container glitch">
-  <i class="fas fa-link link-icon"></i>
-  <span class="stream-text">Stream</span>
-</div>
+                //MAS CANALES
+                { nombre: 'TELEMUNDO', logo: 'https://dl.dropbox.com/scl/fi/bdf5zxap2k6j1ic2e1n46/Telemundo_logo_2018.svg?rlkey=wmwln9wc121jgsza3fxldx1vd', categoria: 'Mas canales',enlace:'https://embed.telextrema.com/embed2/telemundo.html',
+                iframe:true},
+                 { nombre: 'ATV+', logo: 'https://dl.dropbox.com/scl/fi/kyow6xcej0fdjtd7qt07v/SD5M8e12_400x400.jpg?rlkey=e0c895mziika4awdd4dljdeea', categoria: 'Mas canales',enlace:'https://clarovideo.canales.online/mpdk.html?get=Ly8xMDE2LXZvcy5kdHZvdHQuY29tL0RBU0gvbWFuaWZlc3QubXBk&key=YmQxNmQzZGMwMjFlMzEzNjlmMWRmMGNlNjhmMGE0ZjM=&key2=M2I4NzJjMmZiZjNjNGM3ZTZhNzdmMTI2YjhlYmRjOTI=&lang=',
+                iframe:true},
+                { nombre: 'CORAZÓN', logo: 'https://dl.dropbox.com/scl/fi/83wgrjqov6lz8862jubhd/tv-azteca-corazon2514.logowik.com.webp?rlkey=cqjz43qka6zu1g7etnk8vczmk', categoria: 'Mas canales',enlace:'https://stream.ads.ottera.tv/cl/231015ckm3lv1ra6j3r6ahkpo0/1280x720_3070540_0_f.m3u8?i=475_4830',
+                iframe:true},
+                { nombre: 'HCH', logo: 'https://dl.dropbox.com/scl/fi/mvcfnsypbfz91kmmummg8/1b1e779fc0552915b8024a47687ac16e.webp?rlkey=umhz9dxb8rgbd5hjuuhflyxwj', categoria: 'Mas canales',enlace:'https://www.dailymotion.com/embed/video/x81za5c',
+                iframe:true},
+               // { nombre: 'televicentro', logo: 'https://www.televicentro.com/img/TELEVICENTRO-LOGO.png', categoria: 'Mas canales',enlace:'https://mdstrm.com/live-stream/6287fdc9303e3008289ab711',
+              //  iframe:true},
+              { nombre: 'CANAL 5', logo: 'https://dl.dropbox.com/scl/fi/sbvmxnuxebgi70ll0uy0x/Cvo4PpwN_400x400.png?rlkey=ws3a3e1idkwoiwmv9j1c29ldq', categoria: 'Mas canales', enlace: 'https://embed.telextrema.com/embed/canal5.html',
+                  iframe:true},
+                { nombre: 'TELEVISA', logo: 'https://dl.dropbox.com/scl/fi/wl9w46s887ijkslmsd6m6/1fab942697a3a23fe8ca40feeeb315a2.webp?rlkey=ld599waec4dcqa5dmehhozhnu', categoria: 'Mas canales',enlace:'https://channel04-notusa.akamaized.net/hls/live/2029754/event01/index.m3u8',
+                iframe:false},
+                { nombre: 'Televisa', logo: 'https://dl.dropbox.com/scl/fi/igso5rgxjs2le9ftrg9oc/Archivo_Logotipo-de-TV-Azteca.png-Wikipedia-la.png?rlkey=x95e9n0izelv4x0bcbukp0405', categoria: 'Mas canales',enlace:'https://stream.ads.ottera.tv/playlist.m3u8?network_id=5397',
+                iframe:true},
+                { nombre: 'Canal Once', logo: 'https://dl.dropbox.com/scl/fi/eyijls1wxkorkfy5yofdm/Canal-Once.webp?rlkey=s8hqlq9yvpx5dmbksb1q3mgqs', categoria: 'Mas canales',enlace:'https://vivo.canaloncelive.tv/alivepkgr3/ngrp:cepro_all/playlist.m3u8',
+                iframe:false},
+                { nombre: 'RT en Español', logo: 'https://dl.dropbox.com/scl/fi/rp64ougps7yhxqpe411ix/RT-en-Espa-ol.webp?rlkey=ohlcqti9jh4uht3i5en20781f', categoria: 'Mas canales',enlace:'https://rt-esp.rttv.com/live/rtesp/playlist_800Kb.m3u8',
+                iframe:false},
+                { nombre: 'Canal 9 (El Nueve)', logo: 'https://dl.dropbox.com/scl/fi/huqhra4td4n9mcc5fikcu/Canal-9-El-Nueve-_1.webp?rlkey=7b448fkj3ccskj72c6pno806d', categoria: 'Mas canales',enlace:'https://2a1773fcc0c94a639b422d1cf7ba14b7.mediatailor.us-east-1.amazonaws.com/v1/master/4c8323052bc3dbd9aa2eba0b638d8495561e8377/JW-Octubre-Channel09/live/channel09/live.isml/.m3u8',
+                iframe:false},
+                { nombre: 'Visión Tv ', logo: 'https://dl.dropbox.com/scl/fi/igso5rgxjs2le9ftrg9oc/Archivo_Logotipo-de-TV-Azteca.png-Wikipedia-la.png?rlkey=x95e9n0izelv4x0bcbukp0405', categoria: 'Mas canales',enlace:'https://cdn.streamhispanatv.net:3076/live/visiontvlive.m3u8',
+                iframe:false},
+                { nombre: 'El Trece', logo: 'https://dl.dropbox.com/scl/fi/dj664q1xuk0rnrdq4wbcf/Logo_Canal_13_200_8.png?rlkey=2oi5ycwibywvdondqb70rkr8l', categoria: 'Mas canales',enlace:'https://live-01-02-eltrece.vodgc.net/eltrecetv_noti/tracks-v1a1/mono.m3u8',
+                iframe:false},
+                { nombre: 'Tele 13 Chile', logo: 'https://dl.dropbox.com/scl/fi/t607rsv6vd1192dqyh686/t13-push-notification-logo.jpg?rlkey=09x5petye571ea12ia6cfdthc', categoria: 'Mas canales',enlace:'https://www.youtube.com/embed/28Azb5gyTdg?si=WpG3fJRygRZHeK3m',
+                iframe:true},
+                { nombre: 'Canal Sur Andalucia', logo: 'https://dl.dropbox.com/scl/fi/4l1fde3lal3mrauh0eb1v/159b550fc1b045afb6c6a442f1e38a2f.jpg?rlkey=yij4t4dr809uc3yuox9b95i3o', categoria: 'Mas canales',enlace:'https://www.youtube.com/embed/FBZbfDoALOk?si=3CaHSolA99e-LRP3',
+               iframe:true},
+               { nombre: 'CINEMAX TV', logo: 'https://dl.dropbox.com/scl/fi/jun8ge42gpdzi3li2kdxn/ar_cinemax-sur_m.png?rlkey=6asnjh8iweyh7pa18mzo32m5m', categoria: 'Mas canales',enlace:'https://cdn5.nerxel.com/test23.html?get=Ly8xMjI3LXZvcy5kdHZvdHQuY29tL0RBU0gvbWFuaWZlc3QubXBk&key=MmJkY2YxMmEyZDY4MzA1ZGI2YzVhMTUyMWVmZDExYzc=&key2=ZmYyMmNjYjJlOGI3NTMwNWY2MzRlYzkwZDE4ZGMwMWM=&update3j56j2',
+                iframe:true},
+                { nombre: 'El Pinguino TV', logo: 'https://dl.dropbox.com/scl/fi/kgw7cpha5x8hprc13tlru/unnamed.jpg?rlkey=r4jyfn771qqaetdhlh3jyagzn', categoria: 'Mas canales',enlace:'https://rudo.video/live/pinguinotv',
+                iframe:true},
+                { nombre: 'CANAL PAIS', logo: 'https://dl.dropbox.com/scl/fi/v0axo4zk5au63acagx92a/global_fff8a236c6ab7651401330f07bc88ab422023108.jpg?rlkey=260amxa4gjoi1wj21ara3qq39', categoria: 'Mas canales',enlace:'https://rudo.video/live/13canalpais',
+                iframe:true},
+                
+                
+        ];
+        
+        var contenedor = document.getElementById("contenedorCanales");
+        var modal = document.getElementById("modal");
+        
+        function mostrarTodos() {
+            contenedor.innerHTML = '';
+            canales.forEach(function(canal) {
+              seccionMostrar.style.display ='grid';
+              canalesTitulo.style.display ='none';
+               agregarCanal(canal); 
+                //mas recientes
+                if (typeof mostrarUltimosVisitados === 'function') {
+    mostrarUltimosVisitados(); 
+    } else {}
+    
+            });
+            
+        }
+        
+        function mostrarCategoria(categoria) {
+          
+            contenedor.innerHTML = '';
+            canales.forEach(function(canal) {
+                if (canal.categoria === categoria) {
+                    agregarCanal(canal);
+                    document.querySelector('.seccion').style.height ='100vh';
+                    document.querySelector('.seccion').style.overflow ='auto';
+                    
+                   mostrarUltimosVisitados();
+                }
+                
+            });
+            seccionMostrar.style.display ='none';
+            canalesTitulo.style.display ='none';
+   }
 
-<canvas id="particles"></canvas>
+        function agregarCanal(canal) {
+            var seccion = document.getElementById(canal.categoria);
+            if (!seccion) {
+                seccion = document.createElement("div");
+                seccion.id = canal.categoria;
+                seccion.className = "seccion";
+                var titulo = document.createElement("h2");
+                titulo.className = "seccion-titulo";
+                titulo.textContent = canal.categoria;
+                titulo.style.width = '100%'; 
+                
+                seccion.append(titulo);
+                contenedor.appendChild(seccion);
+            }
 
+            var canalDiv = document.createElement("div");
+            canalDiv.className = "canal";
+      canalDiv.id =canal.nombre ;
+            
+            var logoImg = document.createElement("img");
+            logoImg.src = canal.logo;
+            
+            var favorIcon = document.createElement("button");
+            favorIcon.innerHTML = '<i class="fas fa-thumbtack pin-icon"></i>';
+            favorIcon.id = `marcarFavoritoBtn${canal.nombre}`;
+            favorIcon.addEventListener('click',()=>{
+              toggleFavoritoClick(canal.nombre)
+            })
+            favorIcon.style.fontSize ='5px';
+            
+            var contet = document.createElement("div");
+            //logoImg.src = canal.logo;
+            contet.classList.add('canale')
+            
+            canalDiv.addEventListener("click", function() {
+             marcarUltimoVisitado(canalDiv.id);
+                abrirModal(canal);
+              //  console.log(canalDiv)
+            });
+            contet.append(favorIcon,canalDiv)
+            canalDiv.append(logoImg);
+            
+            seccion.appendChild(contet);
+        }
+function abrirModal(canal) {
+            var modalTitle = modal.querySelector(".modal-title");
+            modalTitle.textContent = canal.nombre;
+if(canal.iframe==true){
+  c_Iframe.style.display ='grid';
+  videoCanal.style.display ='none';
+  iframe1.src = canal.enlace;
+}else{
+  iframe1.src = '';
+  c_Iframe.style.display ='none';
+videoCanal.style.display ='flex';
+}
+            // Puedes agregar aquí el contenido del reproductor para el canal
+videoCanal.src =  canal.enlace;
+            modal.style.display = "block";
+            videoCanal.poster = canal.logo;
+            
+        }
+
+        function cerrarModal() {
+            modal.style.display = "none";
+            videoCanal.src= '';
+            iframe1.src= '';
+        }
+        $(document).ready(function() {
+            $(".canal").slick({
+                infinite: true,
+                slidesToShow: 1,  // Cambia este valor según cuántos canales quieras mostrar en cada diapositiva
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000
+            });
+        });
+        
+        mostrarTodos(); // Mostrar todos los canales al cargar la página
+    </script>
+    <script>
+      function toggleFullscreen() {
+        const iframe = document.getElementById('iframe1');
+        if (!document.fullscreenElement) {
+          if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+          } else if (iframe.mozRequestFullScreen) {
+            iframe.mozRequestFullScreen();
+          } else if (iframe.webkitRequestFullscreen) {
+            iframe.webkitRequestFullscreen();
+          } else if (iframe.msRequestFullscreen) {
+            iframe.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
+      }
+    </script>
 <script>
+  // Función para marcar el contenedor como visitado
+function marcarUltimoVisitado(contenedorId) {
+       let ultimosVisitados = obtenerUltimosVisitados();
+   
+       // Si el contenedor ya está en la lista, lo quitamos para volverlo a agregar al final
+       let index = ultimosVisitados.indexOf(contenedorId);
+       if (index !== -1) {
+         ultimosVisitados.splice(index, 1);
+       }
+   
+       // Agregamos el contenedor al final de la lista
+       ultimosVisitados.push(contenedorId);
+   
+       // Mantenemos solo los últimos 5 visitados
+       if (ultimosVisitados.length > 8) {
+         ultimosVisitados.shift();
+       }
+   
+       // Guardamos la lista en localStorage
+       localStorage.setItem('ultimosVisitados', JSON.stringify(ultimosVisitados));
+   
+       // Actualizamos la sección de últimos visitados
+       mostrarUltimosVisitados();
+     }
+   
+     // Función para obtener la lista de últimos visitados desde localStorage
+     function obtenerUltimosVisitados() {
+       let ultimosVisitados = localStorage.getItem('ultimosVisitados');
+   
+       if (ultimosVisitados === null) {
+         return [];
+       }
+   
+       return JSON.parse(ultimosVisitados);
+     }
+   
+     // Función para mostrar los últimos visitados
+     
+   
+  // Mostrar los últimos visitados al cargar la página
+  window.onload = function() {
+    mostrarUltimosVisitados();
+    setTimeout(function() {
+      // Tu acción aquí
+      const targetElement = document.getElementById('cine');
+      targetElement.scrollIntoView({ behavior: 'smooth' });
 
-// Animación de letras
-const span = document.querySelector('.stream-text');
-const letters = span.textContent.split("");
 
-span.textContent = "";
+      }, 3000);
+      
+    seccionMostrar.style.opacity ='1';
+    seccionMostrar.style.paddingTop ='45px';
+seccionMostrar.style.zIndex ='1';    
+  }
+</script>
+<!----favorito-->
+<script>
+    function marcarComoFavorito(contenedorId) {
+    let favoritos = obtenerFavoritos();
 
-letters.forEach(letter => {
-  const l = document.createElement("span");
-  l.textContent = letter;
-  l.className = "animated-chars"; 
-  span.append(l);
-});
-
-// Partículas con Canvas  
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-let particles = [];
-const numParticles =23 ;
-
-for(let i = 0; i < numParticles; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: Math.random() * 5 - 6,
-    vy: Math.random() * 3 - 4,
-    color: 'white'
-  })
-} 
-
-function drawParticles() {
-
-  ctx.clearRect(0,0,canvas.width, canvas.height);
-  
-  particles.forEach(particle => {
-    particle.x += particle.vx;
-    particle.y += particle.vy;
-    
-    if(particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-    if(particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-
-    ctx.beginPath();
-    ctx.fillStyle = particle.color;
-    ctx.arc(particle.x, particle.y, 1, 11, 2 * Math.PI);
-    ctx.fillStyle = 'rgba(255, 255, 255, 1)';
-    
-    ctx.shadowBlur = 100;
-    ctx.fill();
-  });
-  
-  requestAnimationFrame(drawParticles);
+    if (!favoritos.includes(contenedorId)) {
+        favoritos.push(contenedorId);
+        localStorage.setItem('favoritos', JSON.stringify(favoritos));
+    }
 }
 
-drawParticles();
+function obtenerFavoritos() {
+    let favoritos = localStorage.getItem('favoritos');
 
-</script>
- <script>
-      const popupcarga = document.querySelector('.popupcarga');
-popupcarga.classList.add('show');
-   </script>
+    if (favoritos === null) {
+        return [];
+    }
 
-</div>
+    return JSON.parse(favoritos);
+}
 
-</div>
-<!-- Contenedor para mostrar la ventana emergente con detalles de la película -->
-<div id="popupContainer" class="popup-container">
-  <div class="popup-content">
-    <!-- Aquí se mostrarán los detalles de la película -->
-    <iframe id="movieDetailsIframe" width="400" height="300" src="" frameborder="0"></iframe><!-- Botón de pantalla completa -->
-        <button id="fullscreen-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i> </button>
-<!--votar-->
-<div id="votos"></div>
-
-    <p id="movieDetails"></p>
-    <p id="movieDuration"style="font-family: 'Ubuntu', sans-serif; color:gray;position:relative;left: ;margin:0;"></p>
-<h5 style="font-family: 'Ubuntu', sans-serif; colo-webkit-text-stroke:0.2px black;position:relative;left: ;top:10px;margin:0;font-size: 10px;">Resumen</h5>
-    <p id="movieSynopsis"></p>
-    <span class="botonera_links" id="botonera_links_ID"></span>
-        <p id="movieGenre"></p>
-    <button id="closeButton"><i class="fa-sharp fa-solid fa-circle-xmark"></i></button>
-    <div class="optionElementContent_Css" id="optionElementContent_ID"></div>
+let marcadorR = false;
+function mostrarUltimosVisitados(canal) {
+    let ultimosVisitadosDiv = document.getElementById('ultimosVisitados');
+    let favoritosfijos = document.createElement('div');
     
-  </div>
-</div>
+    let ultimosVisitados = obtenerUltimosVisitados();
+    let favoritos = obtenerFavoritos();
 
- <div class="c_contenido">
-  <div class="contenido">
-  <div id="moviesContainer"></div>
-<div id="navigationContainer"></div>
+    ultimosVisitadosDiv.innerHTML = "";
 
-</div>
-</div>
+    // Primero, mostramos los canales marcados como favoritos
+    favoritos.forEach(id => {
+        let contenedor = document.getElementById(id);
+
+        if (contenedor) {
+            let clone = contenedor.cloneNode(true);
+            clone.dataset.originalId = id;
+
+            
+clone.id = `clon${clone.dataset.originalId}`
+         clone.classList.add('favorito'); // Aplicamos la clase 'favorito' a los favoritos
+         clone.classList.add('clone');
+           clone.classList.remove('canal'); 
+clone.addEventListener('click', function() {
+          let originalId = this.dataset.originalId;
+          document.getElementById(originalId)
+            .click();
+          //  console.log(originalId);
+        });
+       // favoritosfijos.style.width ='100px';
+    favoritosfijos.style.display ='flex';
+      favoritosfijos.id= 'favoritosfijos';
+      
+       // ultimosVisitadosDiv.appendChild(favoritosfijos);
+            favoritosfijos.insertBefore(clone, favoritosfijos.firstChild);
+           let boton = document.getElementById(`marcarFavoritoBtn${clone.dataset.originalId}`);
+           if (boton) {
+             boton.classList.add('marcado');
+           } 
+        }
+    });
+
+    // Luego, mostramos los canales no favoritos
+    ultimosVisitados.forEach(id => {
+      let contenedor = document.getElementById(id);
+    if (!favoritos.includes(id)) {
+      if (contenedor) {
+        let clone = contenedor.cloneNode(true);
+        clone.dataset.originalId = id; // Añadimos el atributo de datos
+    
+        clone.id = `clon${clone.dataset.originalId}`
+        clone.classList.remove('canal');
+        clone.classList.add('clone');
+        // Agregamos un evento de clic al clon que simula el clic en el contenedor original
+        clone.addEventListener('click', function() {
+          let originalId = this.dataset.originalId;
+          document.getElementById(originalId)
+            .click();
+          //  console.log(originalId);
+        });
+    
+      
+        // Insertamos el clon al principio del contenedor
+        ultimosVisitadosDiv.insertBefore(clone, ultimosVisitadosDiv.firstChild);
+    //favoritos al inicio
+        ultimosVisitadosDiv.insertBefore(favoritosfijos, ultimosVisitadosDiv.firstChild);
+      }
+      
+    }
+    });
+    //evitar los mas recientes se estanque
+    if(!marcadorR){
+      marcadorR = true;
+    navTodos.click()
+    }
+}
+
+
+function toggleFavorito(contenedorId) {
+    let favoritos = obtenerFavoritos();
+let boton = document.getElementById(`marcarFavoritoBtn${contenedorId}`);
+
+    if (favoritos.includes(contenedorId)) {
+        favoritos = favoritos.filter(id => id !== contenedorId);
+        // Si el contenedor se desmarcó, quitamos la clase "marcado" del botón
+        if (boton) {
+          boton.classList.remove('marcado');
+        }
+    } else {
+        favoritos.push(contenedorId);
+    }
+
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+}
+
+
+
+
+function limiteFavoritosAlcanzado() {
+    let favoritos = obtenerFavoritos();
+    return favoritos.length >= 3; // Establecemos el límite en 2
+}
+
+
+
+function toggleFavoritoClick(contenedorId) {
+    let favoritos = obtenerFavoritos();
+
+    if (favoritos.includes(contenedorId)) {
+        toggleFavorito(contenedorId);
+        mostrarUltimosVisitados();
+    } else if (!limiteFavoritosAlcanzado()) {
+        toggleFavorito(contenedorId);
+        mostrarUltimosVisitados();
+    } else {
+        alert("Solo puedes fijar 3 canales");
+        document.getElementById('seccionMostrar').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+
+
+   </script>
+ <!----peliculas opcional--> 
+ <script>
+  var baseIframe = document.getElementById('BaseIframe');
+  var iframe = document.createElement('iframe');
+  
+  iframe.style.width = '100%';
+   iframe.style.height = '95vh';
+   iframe.style.background = 'red';
+   iframe.src = 'https://linkstream0.github.io'
+  // baseIframe.append(iframe)
+ </script>
+
 
 </body>
- <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script> <!-- Agrega la biblioteca js-cookie --> 
-    <script src="contador.js"></script>
-    <script>
-       // Configura tu objeto de configuración de Firebase
-const firebaseConfig = {
-   apiKey: "AIzaSyCB0fQGAd7NSwgP-GWive4YRAU9v_uV1F8",
-   authDomain: "cooperativ-cb0d4.firebaseapp.com",
-   databaseURL: "https://cooperativ-cb0d4-default-rtdb.firebaseio.com",
-   projectId: "cooperativ-cb0d4",
-   storageBucket: "cooperativ-cb0d4.appspot.com",
-   messagingSenderId: "1009427324331",
-   appId: "1:1009427324331:web:5a125c9e46dfbbe87c86ee",
-   measurementId: "G-VB36CLTBCN"
-};
-
-// Inicializa Firebase con la configuración
-firebase.initializeApp(firebaseConfig);
-
-// Obtén una referencia a la base de datos de Firebase
-const database = firebase.database();
-
-// Obtén el elemento del contador en el DOM
-//const contadorElemento = document.getElementById('contador');
-
-// Obtiene el valor actual del contador desde la base de datos de Firebase
-database.ref('contador').once('value').then(snapshot => {
-    let contador = snapshot.val();
-    if (contador === null) {
-        contador = 0;
-    }
-    
-    // Incrementa el contador cada vez que la página se carga
-    contador++;
-    
-    // Actualiza el contador en el DOM
-  //  contadorElemento.textContent = contador;
-    
-    // Guarda el nuevo valor del contador en la base de datos de Firebase
-    database.ref('contador').set(contador);
-});
-
-    </script>
-   <script src="votacionj.js"></script>
-     <script src="https://dl.dropbox.com/scl/fi/4f2iviy8skt4msu3wkag6/peliculasLogica.js?rlkey=3ep2vp6r8q8qgzoccy582u055"></script>
-     <script src="https://dl.dropbox.com/scl/fi/2qxfagynksp65rzwbp3iz/buscador.js?rlkey=hn9yqujx9txzzrgtnvowv6oqg"></script>
-  <!--abrir ifra--->
-    <script>
-       const openModalButton = document.getElementById("enVivoBtn");
-       //programaciondomimgo
-       const openModalButton2 = document.getElementById("cineVivoBtn");
-       const modal = document.getElementById("enVivoP");
-  
-       // Función para abrir el modal
-       function openModal() {
-          modal.style.display = "grid";
-          iframeEnVivo.src ='https://linkstream0.github.io/LinkStream0Live.github.io/';
-       }
-       function openModal2() {
-          modal.style.display = "grid";
-          iframeEnVivo.src ='https://linkstream0.github.io/Prograciondeldia/';
-       }
-  
-       // Función para cerrar el modal
-       function closeModal() {
-          modal.style.display = "none";
-          iframeEnVivo.src ='';
-       }
-  
-       // Abrir el modal al hacer clic en el botón
-      // openModalButton.addEventListener("click", openModal);
-//  openModalButton2.addEventListener("click", openModal2);
-       // Cerrar el modal al hacer clic fuera del contenido del modal
-       // Cerrar el modal al hacer clic en el botón de cierre
-       cerrar.addEventListener("click", closeModal);
-       window.addEventListener("click", (event) => {
-          if (event.target === modal) {
-             closeModal();
-          }
-       });
-    </script>
 </html>
