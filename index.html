@@ -258,8 +258,9 @@ color: white ;
         <!---Em vvivo btn---->     
 <span class="todas clickefect1" id="enVivoBtn" style="font-size:7px;display:none"><i class="fa-solid fa-tv" style="font-size:10px"></i>TV<hr></span>
     <!---Tv---->     
-<span class="todas clickefect1" id="cineVivoBtn" style="font-size:7px;display: grid;padding:10px"><i class="fa-solid fa-tv" style="font-size:15px;"></i>T</i>V</span><div class="referencias_C2">
-  <!-- Referencias para los géneros -->
+<a href='go:me'><span class="todas clickefect1" id="cineVivoBtn" style="font-size:7px;display: grid;padding:10px"><i class="fa-solid fa-tv" style="font-size:15px;"></i>T</i>V</span><div class="referencias_C2">
+</a>
+    <!-- Referencias para los géneros -->
   <div class="contenedor_referencia">
   <span class="referencia clickefect1" onclick="agregarReferencia('accion')" style="display: flex"><i class="fa-solid fa-gun"></i>Accion</span>
   <span class="referencia clickefect1" onclick="agregarReferencia('comedia')"style="display: flex"><i class="fa-solid fa-masks-theater"></i>Comedia</span>
@@ -477,8 +478,8 @@ database.ref('contador').once('value').then(snapshot => {
        }
   
        // Abrir el modal al hacer clic en el botón
-       openModalButton.addEventListener("click", openModal);
-  openModalButton2.addEventListener("click", openModal2);
+      // openModalButton.addEventListener("click", openModal);
+//  openModalButton2.addEventListener("click", openModal2);
        // Cerrar el modal al hacer clic fuera del contenido del modal
        // Cerrar el modal al hacer clic en el botón de cierre
        cerrar.addEventListener("click", closeModal);
